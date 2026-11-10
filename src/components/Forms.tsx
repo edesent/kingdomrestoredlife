@@ -1,0 +1,313 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { contactTopics as topics, nextSundays } from "@/lib/site";
+import Phone from "./Phone";
+import { useForm } from "./useFormToken";
+
+function Sent({ title, body }: { title: string; body: string }) {
+  return (
+    <div className="rounded-[1.5rem] bg-green-ink p-8 text-white sm:p-10" role="status">
+      <p className="display text-3xl text-gold sm:text-4xl">{title}</p>
+      <p className="mt-4 text-lg text-white/85">{body}</p>
+    </div>
+  );
+}
+
+function Honeypot() {
+  return (
+    <div className="absolute -left-[9999px]" aria-hidden>
+      <label>
+        Company <input name="company" tabIndex={-1} autoComplete="off" />
+      </label>
+    </div>
+  );
+}
+
+function ErrorNote({ error }: { error: string }) {
+  return (
+    <p role="alert" className="rounded-xl bg-fire/10 p-4 font-medium text-fire-deep ring-1 ring-fire/40 sm:col-span-2">
+      {error} <Phone className="font-bold underline" fallback="" />
+    </p>
+  );
+}
+
+function fields(form: HTMLFormElement) {
+  return Object.fromEntries(new FormData(form).entries());
+}
+
+function Choice({
+  name,
+  options,
+  value,
+  onChange,
+  cols = 3,
+}: {
+  name: string;
+  options: { id: string; label: string; hint?: string }[];
+  value: string;
+  onChange: (v: string) => void;
+  cols?: 2 | 3;
+}) {
+  return (
+    <div className={`grid gap-2 ${cols === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`} role="radiogroup" aria-label={name}>
+      {options.map((o) => (
+        <button
+          key={o.id}
+          type="button"
+          role="radio"
+          aria-checked={value === o.id}
+          onClick={() => onChange(o.id)}
+          className={`rounded-xl px-4 py-3 text-left text-sm font-semibold transition ${
+            value === o.id ? "bg-green text-white shadow-lg" : "bg-white ring-1 ring-inset ring-ink/15 hover:ring-green/60"
+          }`}
+        >
+          {o.label}
+          {o.hint && <span className={`mt-0.5 block text-xs font-normal ${value === o.id ? "text-white/75" : "text-ink/55"}`}>{o.hint}</span>}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+const services = [
+  { id: "worship", label: "Sunday Worship", hint: "12:30 pm" },
+  { id: "early", label: "A little early", hint: "to meet the pastor first" },
+];
+
+/** "We're coming." */
+export function VisitForm() {
+  const { submit, status, error } = useForm("visit");
+  const [service, setService] = useState(services[0].id);
+  const chosen = services.find((s) => s.id === service) ?? services[0];
+  const days = useMemo(() => nextSundays(4), []);
+
+  if (status === "sent")
+    return (
+      <Sent
+        title="See you Sunday."
+        body="Pastor Hamlet and the church family will be looking for you. After your first visit, you are no longer a visitor."
+      />
+    );
+
+  return (
+    <form
+      className="relative grid gap-5 sm:grid-cols-2"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submit({ ...fields(e.currentTarget), service: `${chosen.label} (${chosen.hint})` });
+      }}
+    >
+      <div className="sm:col-span-2">
+        <label htmlFor="v-name" className="label">
+          Your name
+        </label>
+        <input id="v-name" name="name" required className="field" autoComplete="name" />
+      </div>
+      <div className="sm:col-span-2">
+        <span className="label">When will you arrive?</span>
+        <Choice name="When will you arrive?" options={services} value={service} onChange={setService} cols={2} />
+      </div>
+      <div>
+        <label htmlFor="v-day" className="label">
+          Which Sunday?
+        </label>
+        <select id="v-day" name="day" className="field" defaultValue={days[0].value}>
+          {days.map((d) => (
+            <option key={d.value} value={d.value}>
+              {d.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="v-party" className="label">
+          How many coming?
+        </label>
+        <select id="v-party" name="party" className="field" defaultValue="1">
+          {["1", "2", "3", "4", "5", "6", "7", "8+"].map((n) => (
+            <option key={n}>{n}</option>
+          ))}
+        </select>
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor="v-contact" className="label">
+          Phone or email (so we can say hello)
+        </label>
+        <input id="v-contact" name="contact" className="field" autoComplete="email" />
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor="v-note" className="label">
+          Anything we should know? (optional)
+        </label>
+        <textarea id="v-note" name="note" rows={3} className="field" />
+      </div>
+      <label className="flex items-center gap-3 sm:col-span-2">
+        <input type="checkbox" name="kids" className="h-5 w-5 accent-[var(--green)]" />
+        I’m bringing kids
+      </label>
+      <Honeypot />
+      {status === "error" && <ErrorNote error={error} />}
+      <div className="sm:col-span-2">
+        <button type="submit" className="btn btn-green w-full sm:w-auto" disabled={status === "sending"}>
+          {status === "sending" ? "Sending…" : "We’re coming"}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+const notifyCopy = {
+  updates: { sent: "You'll hear from KRL when there's news: services, events and announcements.", button: "Join the mailing list" },
+  events: { sent: "We'll let you know when the next event is on the calendar.", button: "Keep me posted" },
+} as const;
+
+/** Short sign-ups: the mailing list and event heads-ups. */
+export function NotifyForm({ topic = "updates" }: { topic?: keyof typeof notifyCopy }) {
+  const { submit, status, error } = useForm("notify");
+  const copy = notifyCopy[topic];
+
+  if (status === "sent") return <Sent title="You're on the list." body={copy.sent} />;
+
+  return (
+    <form
+      className="relative grid gap-5 sm:grid-cols-2"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submit({ ...fields(e.currentTarget), topic });
+      }}
+    >
+      <div>
+        <label htmlFor={`n-name-${topic}`} className="label">
+          Name
+        </label>
+        <input id={`n-name-${topic}`} name="name" required className="field" autoComplete="name" />
+      </div>
+      <div>
+        <label htmlFor={`n-contact-${topic}`} className="label">
+          Phone or email
+        </label>
+        <input id={`n-contact-${topic}`} name="contact" required className="field" />
+      </div>
+      <Honeypot />
+      <button type="submit" className="btn btn-green sm:col-span-2 sm:justify-self-start" disabled={status === "sending"}>
+        {status === "sending" ? "Sending…" : copy.button}
+      </button>
+      {status === "error" && <ErrorNote error={error} />}
+    </form>
+  );
+}
+
+
+export function ContactForm({ topic }: { topic?: string }) {
+  const { submit, status, error } = useForm("contact");
+
+  if (status === "sent")
+    return <Sent title="Message sent." body="Thank you for reaching out. Someone from Kingdom Restored Life will get back to you soon." />;
+
+  return (
+    <form
+      className="relative grid gap-5 sm:grid-cols-2"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submit(fields(e.currentTarget));
+      }}
+    >
+      <div className="sm:col-span-2">
+        <label htmlFor="c-name" className="label">
+          Your name
+        </label>
+        <input id="c-name" name="name" required className="field" autoComplete="name" />
+      </div>
+      <div>
+        <label htmlFor="c-email" className="label">
+          Email
+        </label>
+        <input id="c-email" name="email" type="email" className="field" autoComplete="email" />
+      </div>
+      <div>
+        <label htmlFor="c-phone" className="label">
+          Phone
+        </label>
+        <input id="c-phone" name="phone" type="tel" className="field" autoComplete="tel" />
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor="c-topic" className="label">
+          What’s it about?
+        </label>
+        <select id="c-topic" name="topic" className="field" defaultValue={topic && topics.includes(topic) ? topic : topics[0]}>
+          {topics.map((t) => (
+            <option key={t}>{t}</option>
+          ))}
+        </select>
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor="c-message" className="label">
+          Message
+        </label>
+        <textarea id="c-message" name="message" rows={5} required className="field" />
+      </div>
+      <Honeypot />
+      {status === "error" && <ErrorNote error={error} />}
+      <div className="sm:col-span-2">
+        <button type="submit" className="btn btn-green" disabled={status === "sending"}>
+          {status === "sending" ? "Sending…" : "Send message"}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+/** Prayer requests reach the pastors; "confidential" marks them pastor-only. */
+export function PrayerForm() {
+  const { submit, status, error } = useForm("prayer");
+
+  if (status === "sent")
+    return <Sent title="Shalom!" body="We've received your request and will diligently seek the Lord on your behalf. You are not walking through this alone." />;
+
+  return (
+    <form
+      className="relative grid gap-5"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submit(fields(e.currentTarget));
+      }}
+    >
+      <div>
+        <label htmlFor="p-request" className="label">
+          How can we pray for you?
+        </label>
+        <textarea id="p-request" name="request" rows={5} required className="field" />
+      </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="p-name" className="label">
+            Name (optional)
+          </label>
+          <input id="p-name" name="name" className="field" autoComplete="name" />
+        </div>
+        <div>
+          <label htmlFor="p-contact" className="label">
+            Phone or email (optional)
+          </label>
+          <input id="p-contact" name="contact" className="field" />
+        </div>
+      </div>
+      <label className="flex items-center gap-3">
+        <input type="checkbox" name="confidential" className="h-5 w-5 accent-[var(--green)]" />
+        Keep this between me and the pastor
+      </label>
+      <label className="flex items-center gap-3">
+        <input type="checkbox" name="wantsCall" className="h-5 w-5 accent-[var(--green)]" />
+        I’d like someone to call me
+      </label>
+      <Honeypot />
+      {status === "error" && <ErrorNote error={error} />}
+      <div>
+        <button type="submit" className="btn btn-green" disabled={status === "sending"}>
+          {status === "sending" ? "Sending…" : "Send prayer request"}
+        </button>
+      </div>
+    </form>
+  );
+}

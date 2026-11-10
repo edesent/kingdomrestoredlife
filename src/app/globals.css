@@ -1,0 +1,393 @@
+@import "tailwindcss";
+
+/*
+ * Colors come from the KRL crest: the deep emerald oval, the gold ring and
+ * ribbon ("Restoring Lives Wholly"), and the fire orb at the centre of the
+ * shield. Paper, stone and ink are the warm neutrals around them.
+ */
+:root {
+  --ink: #141512;
+  --ink-soft: #2a2b26;
+  --paper: #f7f4ef;
+  --stone: #ece6dd;
+  --stone-deep: #d9d0c3;
+  --green: #17591f;
+  --green-deep: #0b3a12;
+  --green-ink: #072a0d;
+  --green-pale: #e2ecdc;
+  --gold: #e0b94a;
+  --gold-deep: #8a5f00;
+  --gold-pale: #f6ecc9;
+  --fire: #f05a00;
+  --fire-deep: #c8410a;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-stone: var(--stone);
+  --color-stone-deep: var(--stone-deep);
+  --color-green: var(--green);
+  --color-green-deep: var(--green-deep);
+  --color-green-ink: var(--green-ink);
+  --color-green-pale: var(--green-pale);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-pale: var(--gold-pale);
+  --color-fire: var(--fire);
+  --color-fire-deep: var(--fire-deep);
+  --font-sans: var(--font-archivo);
+  --font-serif: var(--font-newsreader);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--green);
+  color: #fff;
+}
+
+@layer components {
+  /* Wide, heavy capitals. */
+  .display {
+    font-family: var(--font-archivo), system-ui, sans-serif;
+    font-weight: 800;
+    font-stretch: 125%;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+  }
+  .heading {
+    font-family: var(--font-archivo), system-ui, sans-serif;
+    font-weight: 700;
+    font-stretch: 112%;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+  }
+  /* Scripture and the church's own words. */
+  .serif {
+    font-family: var(--font-newsreader), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .serif-italic {
+    font-family: var(--font-newsreader-italic), Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .eyebrow {
+    font-weight: 700;
+    font-stretch: 118%;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.72rem;
+  }
+  /* Times are always set in the plain sans so a 3 never reads as a 5. */
+  .time {
+    font-family: var(--font-archivo), system-ui, sans-serif;
+    font-weight: 800;
+    font-stretch: 110%;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    padding: 0.95rem 1.6rem;
+    font-weight: 700;
+    font-stretch: 112%;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    text-align: center;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn:disabled {
+    opacity: 0.6;
+    transform: none;
+  }
+  .btn-green {
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 10px 28px -12px rgb(23 89 31 / 0.8);
+  }
+  .btn-green:hover {
+    background: var(--green-deep);
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--green-ink);
+    box-shadow: 0 10px 28px -12px rgb(224 185 74 / 0.8);
+  }
+  .btn-gold:hover {
+    background: #ecc95f;
+  }
+  .btn-ink {
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn-ink:hover {
+    background: #000;
+  }
+  .btn-ghost {
+    box-shadow: inset 0 0 0 1.5px currentColor;
+  }
+  .btn-ghost:hover {
+    background: rgb(20 20 20 / 0.06);
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .field {
+    width: 100%;
+    border-radius: 0.9rem;
+    background: #fff;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    box-shadow: inset 0 0 0 1.5px rgb(20 20 20 / 0.14);
+    transition: box-shadow 0.2s ease;
+  }
+  .field:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--green);
+  }
+
+  /*
+   * The mend. "Restore the broken pieces of lives": a headline arrives split
+   * along a crack, the two halves come together, and the crack is left
+   * filled with gold. Three copies of the same words share one box: the real
+   * heading (top half), a copy for the bottom half, and a thin gold copy
+   * clipped to the line of the crack. See components/Mend.tsx.
+   */
+  .mend {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    /* Headlines can wrap to two or three lines, so their crack runs higher:
+       through the first line, never through the gap between lines. The hero
+       word is always one line and keeps the crack through its middle. */
+    --k: -25%;
+  }
+  .mend-top,
+  .mend-bottom,
+  .mend-seam {
+    transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+  }
+  .mend-top {
+    clip-path: polygon(0 0, 100% 0, 100% calc(var(--k, 0%) + 57%), 79% calc(var(--k, 0%) + 50%), 63% calc(var(--k, 0%) + 61%), 46% calc(var(--k, 0%) + 48%), 30% calc(var(--k, 0%) + 62%), 15% calc(var(--k, 0%) + 51%), 0 calc(var(--k, 0%) + 59%));
+  }
+  .mend-bottom,
+  .mend-seam {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  .mend-bottom {
+    clip-path: polygon(0 calc(var(--k, 0%) + 59%), 15% calc(var(--k, 0%) + 51%), 30% calc(var(--k, 0%) + 62%), 46% calc(var(--k, 0%) + 48%), 63% calc(var(--k, 0%) + 61%), 79% calc(var(--k, 0%) + 50%), 100% calc(var(--k, 0%) + 57%), 100% 100%, 0 100%);
+  }
+  .mend-seam {
+    color: var(--seam, var(--gold));
+    clip-path: polygon(
+      0 calc(var(--k, 0%) + 59% - 0.028em),
+      15% calc(var(--k, 0%) + 51% - 0.028em),
+      30% calc(var(--k, 0%) + 62% - 0.028em),
+      46% calc(var(--k, 0%) + 48% - 0.028em),
+      63% calc(var(--k, 0%) + 61% - 0.028em),
+      79% calc(var(--k, 0%) + 50% - 0.028em),
+      100% calc(var(--k, 0%) + 57% - 0.028em),
+      100% calc(var(--k, 0%) + 57% + 0.028em),
+      79% calc(var(--k, 0%) + 50% + 0.028em),
+      63% calc(var(--k, 0%) + 61% + 0.028em),
+      46% calc(var(--k, 0%) + 48% + 0.028em),
+      30% calc(var(--k, 0%) + 62% + 0.028em),
+      15% calc(var(--k, 0%) + 51% + 0.028em),
+      0 calc(var(--k, 0%) + 59% + 0.028em)
+    );
+    transition-delay: 0.75s;
+  }
+
+  /* The fire orb from the centre of the crest. */
+  .orb {
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 38% 34%, #fff6c2 0%, #ffd34d 16%, #ff9a1a 38%, #f05a00 62%, #b8260f 88%, #8a1607 100%);
+    box-shadow:
+      0 0 0.18em rgb(255 140 20 / 0.55),
+      0 0 0.5em rgb(240 90 0 / 0.3);
+  }
+  .orb-flicker {
+    animation: flicker 4.5s ease-in-out infinite;
+  }
+
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.35;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0.18em rgb(255 140 20 / 0.55),
+      0 0 0.5em rgb(240 90 0 / 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0.24em rgb(255 160 40 / 0.7),
+      0 0 0.75em rgb(240 90 0 / 0.38);
+  }
+}
+
+/* The hero word: broken on arrival, then made whole. */
+@keyframes mend-top {
+  from {
+    transform: translate(-0.04em, -0.1em) rotate(-1.6deg);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes mend-bottom {
+  from {
+    transform: translate(0.05em, 0.12em) rotate(1.3deg);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes seam-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes orb-in {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.hero-top {
+  animation: mend-top 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
+}
+.hero-bottom {
+  animation: mend-bottom 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
+}
+.hero-seam {
+  animation: seam-in 0.9s ease 1.7s both;
+}
+.hero-orb {
+  animation: orb-in 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Scroll reveals: content stays visible without JavaScript. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.js [data-reveal][data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+/*
+ * Mended headlines are broken until they scroll into view (only once
+ * JavaScript is running). They carry their own motion, so they skip the
+ * generic fade-up. Unlayered, like the rules above, so they win over them.
+ */
+.js .mend[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+.js .mend[data-reveal]:not([data-in]) .mend-top {
+  transform: translate(-0.05em, -0.09em) rotate(-1.4deg);
+}
+.js .mend[data-reveal]:not([data-in]) .mend-bottom {
+  transform: translate(0.06em, 0.11em) rotate(1.1deg);
+}
+.js .mend[data-reveal]:not([data-in]) .mend-seam {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-flicker,
+  .hero-top,
+  .hero-bottom,
+  .hero-seam,
+  .hero-orb,
+  .rise {
+    animation: none;
+  }
+  .js [data-reveal],
+  .js .mend[data-reveal]:not([data-in]) .mend-top,
+  .js .mend[data-reveal]:not([data-in]) .mend-bottom {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .js .mend[data-reveal]:not([data-in]) .mend-seam {
+    opacity: 1;
+  }
+}
