@@ -75,7 +75,7 @@ Prayer requests, plan-a-visit, contact (with “Join now” for each ministry an
 
 Everything below comes from a single source, often their 2024 website, and has not been confirmed:
 
-- **Sunday worship at 12:30 pm**, and the **Wednesday prayer call at 6:00 pm** on 425-436-6345, access 828066 (2024 Visit Us page). Is the access code followed by `#`? The tap-to-dial link assumes it is (untested).
+- **Sunday worship is 11:00 AM (EST)** (updated by KRL Administration in November 2026; the 2024 Visit Us page had listed 12:30 pm). The **Wednesday prayer call at 6:00 pm** on 425-436-6345, access 828066, comes from the 2024 Visit Us page and remains unconfirmed. Is the access code followed by `#`? The tap-to-dial link assumes it is (untested).
 - **Where they meet:** the 2024 site said the sanctuary of Iglesia Pentecostal Ebenezer, 100 Ann Marie Drive, Charlotte, NC 28217, across from Burger King, and also that they weren’t meeting in the building because of COVID. Is that still where they worship? (The CRM address, 10075 Revolution Ct Apt A, is a home and is deliberately not on the site.) Map pin is the Census geocode of 100 Ann Marie Dr.
 - **“Virtual worship details”** they asked for: the only virtual piece we know is the prayer call. Do they stream Sundays? Where? (`links.watch`)
 - **Mailing address** P.O. Box 240332, Charlotte, NC 28224 (2024 site). Still current?
