@@ -30,6 +30,7 @@ Preview: https://kingdomrestoredlife.elijahdesent.com (hidden from search engine
 | The days KRL marks every year | `traditions` in `src/lib/site.ts` |
 | The story timeline (2013 → today) | `story` in `src/lib/site.ts` |
 | Scriptures and study questions on /word | `scriptures` in `src/lib/site.ts`, `questions` in `src/app/word/page.tsx` |
+| Weekly KRL Newsletter editions | Upload PDFs under `public/newsletters/`, then add their date, title, summary and PDF link to `newsletterIssues` in `src/lib/newsletters.ts` |
 | Contact-form topics ("What’s it about?") | `contactTopics` in `src/lib/site.ts` |
 | Navigation | `nav` (top bar) and `more` (phone menu + footer) in `src/lib/site.ts` |
 | Photos | `public/photos/`. Alt text sits next to each image where it is used |
