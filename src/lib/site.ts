@@ -85,6 +85,18 @@ export const weekly = [
     note: "Praise, prayer and the preached Word. Come for an Upper-Room Experience.",
   },
   {
+    name: "Corporate Prayer",
+    day: "Tuesday",
+    time: "6:30 PM (EST)",
+    note: "Join the KRL family in corporate prayer.",
+  },
+  {
+    name: "Let's Talk Bible",
+    day: "Tuesday",
+    time: "7:15 PM (EST)",
+    note: "Come together for Bible study and grow in the Word.",
+  },
+  {
     name: "Prayer Call",
     day: "Wednesday",
     time: "6:00 pm",
