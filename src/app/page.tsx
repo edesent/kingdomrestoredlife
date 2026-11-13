@@ -75,7 +75,7 @@ export default function Home() {
 
       {/* ───────────── Every week ───────────── */}
       <section className="bg-ink text-white">
-        <div className="mx-auto grid max-w-6xl gap-px overflow-hidden px-4 sm:px-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-6xl gap-px overflow-hidden px-4 sm:px-6 md:grid-cols-2 xl:grid-cols-3">
           {weekly.map((w, i) => (
             <div key={w.name} data-reveal={i} className="border-white/10 py-9 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0">
               <p className="eyebrow text-gold">{w.day}</p>
