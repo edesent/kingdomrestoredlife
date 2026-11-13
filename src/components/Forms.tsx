@@ -71,7 +71,7 @@ function Choice({
 }
 
 const services = [
-  { id: "worship", label: "Sunday Worship", hint: "12:30 pm" },
+  { id: "worship", label: "Sunday Worship", hint: "11:00 AM (EST)" },
   { id: "early", label: "A little early", hint: "to meet the pastor first" },
 ];
 
