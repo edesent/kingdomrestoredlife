@@ -1,6 +1,6 @@
 import Mark from "./Mark";
 
-/** The crest's heart beside the name, stacked in wide capitals. */
+/** The full KRL seal beside the name, stacked in wide capitals. */
 export default function Wordmark({ light = false, className = "", id = "wm" }: { light?: boolean; className?: string; id?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
