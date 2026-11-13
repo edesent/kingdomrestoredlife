@@ -47,7 +47,7 @@ export default function SupportCenter() {
           <figure data-reveal className="overflow-hidden rounded-[1.75rem] bg-green-ink p-6 sm:p-8">
             <div className="relative aspect-[4/3] w-full">
               <Image
-                src="/photos/krl-crest.png"
+                src="/photos/krl-seal.png"
                 alt="The Kingdom Restored Life crest with the ribbon Restoring Lives Wholly"
                 fill
                 sizes="(min-width: 1024px) 460px, 100vw"
