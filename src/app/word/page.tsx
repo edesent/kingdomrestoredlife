@@ -8,7 +8,7 @@ import { newsletterIssues } from "@/lib/newsletters";
 
 export const metadata: Metadata = {
   title: "Sermons & Bible study",
-  description: "Sermons and Bible study resources from Kingdom Restored Life: the scriptures KRL was built on, with questions for your own study.",
+  description: "Sermons, Bible study resources, and the weekly KRL Newsletter from Kingdom Restored Life, including Scripture and ministry updates.",
 };
 
 /** One question per passage, for personal study or a small group. */
