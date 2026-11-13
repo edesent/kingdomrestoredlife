@@ -35,38 +35,52 @@ export default function About() {
 
       {/* Mission & vision */}
       <section className="grain bg-stone">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-16">
-          <div data-reveal>
-            <p className="eyebrow text-gold-deep">Our mission</p>
-            <p className="mt-5 text-lg leading-relaxed text-ink/80">
-              KRL is called to proclaim the Gospel of Jesus Christ as outlined in scripture: to go into the world and preach
-              and teach the good news to all creation, and to make disciples, encouraging people to accept Christ as their
-              personal Lord and Savior and to be baptized in His name, bearing witness to His death, burial and resurrection.
-            </p>
-            <blockquote className="mt-6 border-l-2 border-gold pl-5">
-              <p className="serif-italic text-xl leading-snug">
-                “Each of you must repent of your sins and turn to God and be baptized in the name of Jesus Christ for the
-                forgiveness of your sins. Then you will receive the gift of the Holy Spirit.”
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+          <p className="serif-italic mb-10 text-center text-xl leading-relaxed text-ink/75" data-reveal>
+            As we come together, we declare the vision and mission of Kingdom Restored Life.
+          </p>
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+            <div data-reveal>
+              <p className="eyebrow text-gold-deep">Our mission</p>
+              <blockquote className="mt-5 border-l-2 border-gold pl-5">
+                <p className="serif-italic text-2xl leading-snug text-ink">
+                  “To be an assembly of believers where people can come for hope, strength, and restoration.”
+                </p>
+              </blockquote>
+              <p className="mt-6 text-lg leading-relaxed text-ink/80">
+                This is a house of hope. This is a place of strength. This is a ministry of restoration.
               </p>
-              <footer className="eyebrow mt-3 text-ink/50">Acts 2:38</footer>
-            </blockquote>
+            </div>
+            <div data-reveal="1">
+              <p className="eyebrow text-gold-deep">Our vision</p>
+              <blockquote className="mt-5 border-l-2 border-gold pl-5">
+                <p className="serif-italic text-2xl leading-snug text-ink">
+                  “To build a ministry that looks like heaven—diverse, unified, Spirit-led, and grounded in sound doctrine.”
+                </p>
+              </blockquote>
+              <p className="mt-6 text-lg leading-relaxed text-ink/80">
+                We declare that this vision is alive in this house and evident among God’s people.
+              </p>
+              <ul className="mt-8 grid grid-cols-2 gap-3">
+                {values.map((v, i) => (
+                  <li key={v.name} className="rounded-2xl bg-paper p-5">
+                    <p className="time text-sm text-gold-deep">0{i + 1}</p>
+                    <p className="heading mt-2 text-lg">{v.name}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div data-reveal="1">
-            <p className="eyebrow text-gold-deep">Our vision</p>
-            <p className="mt-5 text-lg leading-relaxed text-ink/80">
-              This covenant assembly is a multi-cultural ministry that brings us together as one in Christ: submitting to
-              prayer, letting the Lord transform us by the renewing of our minds, a called-out generation forming a
-              family-oriented ministry that shows forth the agape, unconditional love of Christ.
+          <blockquote className="mx-auto mt-14 max-w-3xl rounded-[1.5rem] border-l-4 border-gold bg-paper p-7 text-center sm:p-10" data-reveal>
+            <p className="text-base leading-relaxed text-ink/75">
+              We stand firmly on the promise of the Lord, who declares over us:
             </p>
-            <ul className="mt-8 grid grid-cols-2 gap-3">
-              {values.map((v, i) => (
-                <li key={v.name} className="rounded-2xl bg-paper p-5">
-                  <p className="time text-sm text-gold-deep">0{i + 1}</p>
-                  <p className="heading mt-2 text-lg">{v.name}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <p className="serif-italic mt-5 text-xl leading-relaxed text-ink sm:text-2xl">
+              “For I know the thoughts that I think toward you,” says the Lord, “thoughts of peace and not of evil, to give
+              you a future and a hope.”
+            </p>
+            <p className="eyebrow mt-5 text-gold-deep">Jeremiah 29:11</p>
+          </blockquote>
         </div>
       </section>
 
