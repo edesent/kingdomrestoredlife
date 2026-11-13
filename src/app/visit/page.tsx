@@ -7,7 +7,7 @@ import { church, links, pastor, weekly } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Plan your visit",
-  description: `Sunday worship at 12:30 pm at ${church.street}, Charlotte, NC, and a Wednesday prayer call by phone. What to expect at ${church.name}.`,
+  description: `Sunday worship at 11:00 AM (EST) at ${church.street}, Charlotte, NC, and a Wednesday prayer call by phone. What to expect at ${church.name}.`,
 };
 
 const expect = [
