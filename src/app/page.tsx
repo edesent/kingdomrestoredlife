@@ -472,7 +472,7 @@ export default function Home() {
           <Mark id="come-mark" className="h-20 w-16" />
           <Mend className="display mx-auto mt-8 text-[clamp(2.4rem,7.4vw,6rem)]">Come and enjoy the Lord.</Mend>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-ink/75">
-            Sunday worship at <span className="time font-bold text-ink">12:30 pm</span>. Join us for an Upper-Room
+            Sunday worship at <span className="time font-bold text-ink">11:00 AM (EST)</span>. Join us for an Upper-Room
             Experience. After your first visit, you are no longer a visitor.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
