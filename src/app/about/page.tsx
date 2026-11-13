@@ -82,35 +82,59 @@ export default function About() {
         </p>
 
         <article className="mt-14 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14" data-reveal>
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[1.75rem] bg-stone">
-            <Image
-              src="/photos/pastor-and-lady-hamlet.jpg"
-              alt="Pastor Terrell Hamlet, seated in a patterned silk shirt, with Lady DaShan Hamlet standing behind him in a navy dress"
-              fill
-              sizes="(min-width: 1024px) 384px, 90vw"
-              className="object-cover object-top"
-            />
+          <div className="lg:sticky lg:top-8 lg:self-start">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[1.75rem] bg-stone">
+              <Image
+                src={pastor.photo}
+                alt="Pastor Terrell C. Hamlet, Senior Pastor and Founder of Kingdom Restored Life, Inc."
+                fill
+                sizes="(min-width: 1024px) 384px, 90vw"
+                className="object-cover object-top"
+              />
+            </div>
           </div>
           <div>
             <p className="eyebrow text-gold-deep">{pastor.title}</p>
             <h2 className="display mt-4 text-4xl">{pastor.name}</h2>
-            <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink/80">
+            <div className="mt-5 space-y-5 text-lg leading-relaxed text-ink/80">
               <p>
-                Pastor Hamlet is a native of Baltimore, Maryland, and now lives in Charlotte. He is the founder and leader of
-                Kingdom Restored Life. The vision God gave him is to be a servant-leader, living a life full of faith that lets
-                the Lord restore the broken pieces of lives for Kingdom ministry.
+                Pastor Terrell C. Hamlet is a passionate shepherd, prophetic leader, and visionary builder called to restore
+                broken altars, revive hope, and raise up a generation rooted in faith and purpose. Born in Baltimore, Maryland,
+                and now residing in Charlotte, North Carolina, Pastor Terrell relocated to Charlotte in 2017 and became the
+                founder and Senior Pastor of Kingdom Restored Life, Inc., a thriving non-denominational, Bible-teaching
+                ministry committed to building a community that reflects Heaven—where people can come for hope, gain strength,
+                and be restored.
               </p>
               <p>
-                He earned a Bachelor’s degree in Christian Counseling (2019) and an Associate of Ministry in Biblical Studies
-                (2010) from Kingdom Bible University in Baltimore. In World Kingdom Fresh Fire Ministries he has served as
-                greeter, deacon, worship leader, youth Sunday school teacher and armor-bearer, and today he is Chief
-                Armor-Bearer and trains armor-bearers across the covenant.
+                Educationally, Pastor Hamlet earned both an Associate and Bachelor of Ministry Degree in Biblical Studies and
+                Pastoral Counseling from Kingdom Bible University in Baltimore, Maryland. He has completed Bereavement Ministry
+                Training at Roberta’s House in Baltimore, MD, as well as numerous leadership trainings.
               </p>
               <p>
-                He founded the Kingdom Comfort & Peace Support Center to serve North and South Carolina, and he volunteers as a
-                Guardian ad Litem with the Mecklenburg County courts.
+                In addition to his pastoral calling, Pastor Terrell is the President and Founder of Kingdom Comfort &amp; Peace
+                Support Center in the Carolinas, a 501(c)(3) nonprofit dedicated to helping youth and families navigate grief,
+                trauma, and life transitions. He also serves as Chief Armorbearer and Trainer of Armorbearers within the
+                covenant body of WKFFM and is actively engaged in community leadership as Co-chair of the Charlotte
+                Black/Jewish Leaders Community Alliance.
+              </p>
+              <p>
+                With over 18 years of leadership experience in healthcare, insurance operations, and people development,
+                Pastor Hamlet integrates practical wisdom with prophetic insight to develop leaders, restore broken systems,
+                and release people into their God-given purpose. His ministry is grounded in Jeremiah 29:11 and fueled by a
+                heart for intercession, leadership development, and authentic worship.
+              </p>
+              <p>
+                Above all, Pastor Hamlet is a servant and worshiper of Jesus Christ, walking humbly in the call of God upon his
+                life. His vision is to empower, equip, and encourage hope; to extend the love of God and the life of Christ to
+                all people that they may walk boldly in truth, wholeness, and Kingdom purpose.
               </p>
             </div>
+            <blockquote className="mt-8 rounded-[1.5rem] border-l-4 border-gold bg-stone px-6 py-6 sm:px-8">
+              <p className="eyebrow text-gold-deep">Life’s Mission</p>
+              <p className="serif-italic mt-3 text-xl leading-relaxed text-ink">
+                To restore hope, rebuild people, and release purpose—one soul, one altar, and one assignment at a time.
+              </p>
+            </blockquote>
           </div>
         </article>
 
