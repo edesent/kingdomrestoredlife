@@ -32,7 +32,7 @@ const newsreaderItalic = localFont({
   display: "swap",
 });
 
-const description = `${church.legalName}: ${church.kind.toLowerCase()} in Charlotte, NC, led by ${pastor.name}. Sunday worship at 12:30 pm and a Wednesday prayer call. ${church.motto}.`;
+const description = `${church.legalName}: ${church.kind.toLowerCase()} in Charlotte, NC, led by ${pastor.name}. Sunday worship at 11:00 AM (EST) and a Wednesday prayer call. ${church.motto}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
