@@ -159,7 +159,7 @@ export default function Home() {
           <figure data-reveal className="grain flex flex-col overflow-hidden rounded-[1.75rem] bg-green-ink p-6 sm:p-10">
             <div className="relative aspect-[4/3] w-full">
               <Image
-                src="/photos/krl-crest.png"
+                src="/photos/krl-seal.png"
                 alt="The Kingdom Restored Life crest: an emerald oval ringed in gold with a fire orb inside a gold shield, a white dove, two crossed swords, two gold lions and a ribbon reading Restoring Lives Wholly"
                 fill
                 sizes="(min-width: 1024px) 520px, 100vw"
