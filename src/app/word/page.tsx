@@ -51,6 +51,51 @@ export default function Word() {
           </div>
         </div>
 
+        {/* KRL Newsletter — weekly issues appear here as they are published. */}
+        <section id="krl-newsletter" className="mt-14" aria-labelledby="krl-newsletter-title">
+          <div className="mb-7">
+            <p className="eyebrow text-gold-deep">Stay connected to the Kingdom</p>
+            <h2 id="krl-newsletter-title" className="display mt-3 text-3xl sm:text-4xl">KRL Newsletter</h2>
+            <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink/75">
+              Our weekly newsletter will bring together Sunday Encounter highlights, Let’s Talk Bible recaps,
+              upcoming announcements, and encouragement for the KRL family.
+            </p>
+          </div>
+          {newsletterIssues.length === 0 ? (
+            <Pending service="KRL Newsletter" title="Weekly encouragement is on the way.">
+              Coming soon! Check back for the weekly KRL Newsletter, with ministry updates, sermon and Bible
+              study highlights, and encouragement to carry with you through the week.
+            </Pending>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2">
+              {[...newsletterIssues]
+                .sort((a, b) => b.date.localeCompare(a.date))
+                .map((issue) => (
+                  <article key={issue.date} className="rounded-[1.5rem] border border-ink/10 bg-stone p-6 sm:p-8">
+                    <p className="eyebrow text-gold-deep">
+                      {new Date(`${issue.date}T12:00:00Z`).toLocaleDateString("en-US", {
+                        timeZone: "UTC",
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </p>
+                    <h3 className="heading mt-3 text-2xl">{issue.title}</h3>
+                    {issue.summary && <p className="mt-3 leading-relaxed text-ink/70">{issue.summary}</p>}
+                    <a
+                      href={issue.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex font-semibold text-green underline underline-offset-4 hover:text-green-ink"
+                    >
+                      Read this newsletter (PDF) →
+                    </a>
+                  </article>
+                ))}
+            </div>
+          )}
+        </section>
+
         <ol className="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] bg-ink/10 md:grid-cols-2">
           {scriptures.map((s, i) => (
             <li key={s.ref} data-reveal={i % 2} className="flex flex-col bg-paper p-7 sm:p-10">
