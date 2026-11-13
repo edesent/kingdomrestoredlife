@@ -76,7 +76,7 @@ export const links = {
 
 export const cashAppUrl = links.cashtag ? `https://cash.app/$${links.cashtag}` : "";
 
-/** Confirm these with the church. See README → "Confirm with the church". */
+/** Sunday and Tuesday times confirmed by KRL Administration; confirm the older Wednesday listing. */
 export const weekly = [
   {
     name: "Sunday Worship",
