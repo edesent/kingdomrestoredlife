@@ -9,7 +9,7 @@
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kingdomrestoredlife.elijahdesent.com";
 
 /** One official KRL seal image shared across all site placements. */
-export const krlSeal = "/photos/krl-crest.png";
+export const krlSeal = "/photos/krl-seal.png";
 
 /** Preview hosts stay out of search, so a demo never competes with the church's real listing. */
 export const isDemo = /(\.dfd\.llc|\.vercel\.app|\.elijahdesent\.com)$/.test(new URL(siteUrl).hostname);
