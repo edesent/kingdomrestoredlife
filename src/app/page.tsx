@@ -257,7 +257,7 @@ export default function Home() {
                 className="object-cover"
               />
             </div>
-            <Mark id="pastor-mark" className="absolute -bottom-7 -right-3 h-24 w-20 drop-shadow-md sm:-right-7" />
+            <Mark id="pastor-mark" className="absolute -bottom-7 -right-3 h-24 w-32 drop-shadow-md sm:-right-7" />
           </div>
 
           <div data-reveal="1">
