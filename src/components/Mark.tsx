@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { krlSeal } from "@/lib/site";
 
 /**
  * The complete KRL seal, including the lions, swords, dove, and
