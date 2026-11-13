@@ -469,7 +469,7 @@ export default function Home() {
       {/* ───────────── Come ───────────── */}
       <section className="grain overflow-hidden bg-stone">
         <div className="mx-auto flex max-w-6xl flex-col items-center px-4 py-20 text-center sm:px-6 sm:py-28">
-          <Mark id="come-mark" className="h-20 w-16" />
+          <Mark id="come-mark" className="h-20 w-28" />
           <Mend className="display mx-auto mt-8 text-[clamp(2.4rem,7.4vw,6rem)]">Come and enjoy the Lord.</Mend>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-ink/75">
             Sunday worship at <span className="time font-bold text-ink">11:00 AM (EST)</span>. Join us for an Upper-Room
