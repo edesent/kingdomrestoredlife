@@ -4,6 +4,7 @@ import PageHead from "@/components/PageHead";
 import Pending from "@/components/Pending";
 import { PrayerLine } from "@/components/Phone";
 import { links, scriptures } from "@/lib/site";
+import { newsletterIssues } from "@/lib/newsletters";
 
 export const metadata: Metadata = {
   title: "Sermons & Bible study",
