@@ -81,7 +81,7 @@ export const weekly = [
   {
     name: "Sunday Worship",
     day: "Sunday",
-    time: "12:30 pm",
+    time: "11:00 AM (EST)",
     note: "Praise, prayer and the preached Word. Come for an Upper-Room Experience.",
   },
   {
