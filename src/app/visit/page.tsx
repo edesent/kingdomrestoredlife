@@ -47,7 +47,7 @@ export default function Visit() {
         <div>
           <ul className="space-y-4">
             {weekly.map((w) => (
-              <li key={w.name} className="flex items-baseline justify-between gap-4 border-b border-ink/10 pb-4">
+              <li key={w.name} className="flex flex-wrap items-baseline justify-between gap-2 border-b border-ink/10 pb-4">
                 <span>
                   <span className="heading block text-xl">{w.name}</span>
                   <span className="text-ink/60">{w.day}</span>
