@@ -9,7 +9,7 @@ export default function Mark({ className = "", id = "m" }: { className?: string;
   return (
     <Image
       id={id}
-      src="/photos/krl-crest.png"
+      src={krlSeal}
       alt="Kingdom Restored Life, Inc. seal"
       width={480}
       height={600}
