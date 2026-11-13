@@ -156,15 +156,6 @@ export default function About() {
             </div>
           </article>
           <article data-reveal="1" className="flex gap-5 rounded-[1.5rem] bg-stone p-6 sm:p-8">
-            <div className="relative h-28 w-24 shrink-0 overflow-hidden rounded-2xl bg-stone-deep sm:h-36 sm:w-28">
-              <Image
-                src="/photos/apostle-ralph-long.jpg"
-                alt="Apostle Ralph Long in a clerical collar, a black jacket and a royal-blue stole"
-                fill
-                sizes="112px"
-                className="object-cover object-top"
-              />
-            </div>
             <div>
               <p className="eyebrow text-gold-deep">Our apostolic covering</p>
               <h3 className="heading mt-2 text-2xl">Apostle Dr. Ralph R. Long</h3>
