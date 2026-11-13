@@ -81,7 +81,7 @@ Everything below comes from a single source, often their 2024 website, and has n
 - **Mailing address** P.O. Box 240332, Charlotte, NC 28224 (2024 site). Still current?
 - **Cash App $krestoredlife** (2024 giving page; their request form says “Giving today: Cash App”). Do they still use PayPal?
 - **Kingdom Comfort & Peace Support Center:** what it offers, where, and when. The site only says it serves youth and families in North and South Carolina (pastor’s bio, giving page). The name also appears as “Kingdom Comfort & Peace Center, Inc.”
-- **Bible study:** no day or time was found. The /word page is a study guide built from the scriptures on their old site, with questions written for this demo.
+- **Tuesday gatherings (confirmed by KRL Administration, November 2026):** Corporate Prayer at **6:30 PM (EST)** and **Let's Talk Bible** study at **7:15 PM (EST)**. The /word page is a study guide built from scriptures on the former site, with questions written for the demo.
 - **Sermons:** no archive found (Facebook was not readable from here).
 - The one-line descriptions of War “Roar” Cry, Greeters and Pastoral Support were written for this demo from the ministry names; NuMotion’s is their own.
 - “2020 · By phone” in the story is inferred from the 2024 COVID note plus the conference line.
