@@ -79,7 +79,7 @@ export default function Home() {
           {weekly.map((w, i) => (
             <div key={w.name} data-reveal={i} className="border-white/10 py-9 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0">
               <p className="eyebrow text-gold">{w.day}</p>
-              <p className="time mt-3 text-4xl">{w.time}</p>
+              <p className="time mt-3 text-3xl xl:text-4xl">{w.time}</p>
               <p className="heading mt-2 text-xl">{w.name}</p>
               <p className="mt-2 text-white/65">{w.note}</p>
             </div>
