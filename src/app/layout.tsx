@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import PrayerPopup from "@/components/PrayerPopup";
 import Reveal from "@/components/Reveal";
 import { church, isDemo, pastor, siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main">{children}</main>
         <Footer />
         <Reveal />
+        <PrayerPopup />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
