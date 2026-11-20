@@ -92,9 +92,11 @@ Everything below comes from a single source, often their 2024 website, and has n
 
 Real photos only, from their old Wix site (originals on static.wixstatic.com): Pastor & Lady Hamlet (2400×3000, shown at ≤2000), Pastor Hamlet (624×624), Lady DaShan (524×658), Apostle Long (393×768, shown small), and the crest (transparent PNG). **Not used:** the roaring-lion, “Horn of His Anointing”, praying-hands and church-door images on the old site, which are stock or downloaded art. No stock and no AI images.
 
-## Going live
+## Live
 
-1. Pick and register a domain, then attach it to the Vercel project.
-2. Set `NEXT_PUBLIC_SITE_URL` to the real domain in Vercel. That alone turns search-engine indexing on (`isDemo` in `src/lib/site.ts`).
-3. Remove the two demo-tracking lines at the end of `src/app/layout.tsx` (the comment and the `demo.js` script), then search the repo for `elijahdesent.com/demo.js` and confirm there are no matches.
-4. Set `FORM_WEBHOOK_URL` so the forms deliver.
+Paid 2026-11-20. The domain is **www.krestoredlife.org** (Amazon Registrar, auto-renew). The apex, the old
+demo subdomain and vercel.app redirect to www. `siteUrl` defaults to the real domain, so search indexing is on.
+The demo-tracking script has been removed; never add it back to this site.
+
+Still to do:
+- Set `FORM_WEBHOOK_URL` so the forms deliver.

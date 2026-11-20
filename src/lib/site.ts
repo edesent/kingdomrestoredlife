@@ -6,7 +6,7 @@
  * a broken button. Paste the real link in and the card turns into the real thing.
  */
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kingdomrestoredlife.elijahdesent.com";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.krestoredlife.org";
 
 /** One official KRL seal image shared across all site placements. */
 export const krlSeal = "/photos/krl-seal.png";
