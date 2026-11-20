@@ -6,9 +6,12 @@ import { church } from "@/lib/site";
  * One endpoint for every form on the site (plan-a-visit, prayer requests,
  * contact, and the mailing-list / event sign-ups).
  *
- * Messages go to FORM_WEBHOOK_URL — a Slack (or Teams) incoming webhook — so
- * they reach the pastor's phone in seconds. Until that is set the endpoint
- * answers 503 and the form honestly tells people to call the church.
+ * Messages are emailed through Resend (RESEND_API_KEY, Digital Front Door's
+ * shared key) from forms@dfd.llc to FORM_TO, which defaults to the church
+ * office and the pastor. Reply-To is the visitor's email when they gave one.
+ * FORM_WEBHOOK_URL (a Slack or Teams webhook) is optional and gets a copy.
+ * With neither set the endpoint answers 503 and the form honestly tells
+ * people to call the church.
  *
  * Spam defences: a signed load-time token (GET) that must be at least 3
  * seconds old, a honeypot field, a per-IP rate limit, an allowlist of fields,
@@ -19,7 +22,14 @@ import { church } from "@/lib/site";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const SECRET = process.env.FORM_SECRET || process.env.FORM_WEBHOOK_URL || "";
+const SECRET =
+  process.env.FORM_SECRET || process.env.RESEND_API_KEY || process.env.FORM_WEBHOOK_URL || "";
+
+const FORM_FROM = process.env.FORM_FROM || "Kingdom Restored Life website <forms@dfd.llc>";
+const FORM_TO = (process.env.FORM_TO || "krestoredlife@outlook.com,kingdomrestoredlife@gmail.com")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 const MIN_FILL_MS = 3000;
 const MAX_AGE_MS = 1000 * 60 * 60 * 6;
 
@@ -170,6 +180,38 @@ function visitMessage(b: Body) {
   };
 }
 
+/** The messages are written in Slack markup; strip it for a plain-text email. */
+function toEmail(text: string) {
+  const plain = (line: string) => line.replace(/[*_]/g, "").replace(/^>/, "    ").trimEnd();
+  const [first, ...rest] = text.split("\n");
+  return { subject: plain(first), body: rest.map(plain).join("\n").trim() };
+}
+
+async function sendEmail(key: string, text: string, replyTo?: string) {
+  const { subject, body } = toEmail(text);
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from: FORM_FROM,
+      to: FORM_TO,
+      subject,
+      text: `${body}\n\n—\nSent from the form on ${church.name}'s website.${replyTo ? " Reply to this email to answer them." : ""}`,
+      ...(replyTo ? { reply_to: replyTo } : {}),
+    }),
+  });
+  if (!res.ok) throw new Error(`resend ${res.status}: ${await res.text()}`);
+}
+
+async function postWebhook(url: string, text: string) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text }),
+  });
+  if (!res.ok) throw new Error(`webhook ${res.status}`);
+}
+
 export async function POST(request: Request) {
   const raw = await request.text();
   if (raw.length > 12_000) return NextResponse.json({ error: "Too long." }, { status: 413 });
@@ -201,8 +243,9 @@ export async function POST(request: Request) {
   if ("spam" in built) return fake();
   if ("error" in built) return NextResponse.json({ error: built.error }, { status: 400 });
 
+  const resendKey = process.env.RESEND_API_KEY;
   const webhook = process.env.FORM_WEBHOOK_URL;
-  if (!webhook) {
+  if (!resendKey && !webhook) {
     return NextResponse.json(
       {
         error:
@@ -212,14 +255,16 @@ export async function POST(request: Request) {
     );
   }
 
-  try {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: built.text }),
-    });
-    if (!res.ok) throw new Error(String(res.status));
-  } catch {
+  const replyTo = [body.email, body.contact]
+    .map((v) => clean(v, 120))
+    .find((v) => v.includes("@") && okEmail(v));
+
+  const sends: Promise<void>[] = [];
+  if (resendKey) sends.push(sendEmail(resendKey, built.text, replyTo));
+  if (webhook) sends.push(postWebhook(webhook, built.text));
+  const results = await Promise.allSettled(sends);
+  if (!results.some((r) => r.status === "fulfilled")) {
+    console.error("form delivery failed", results);
     return NextResponse.json(
       { error: "We couldn’t send that just now. Please call the church instead." },
       { status: 502 },

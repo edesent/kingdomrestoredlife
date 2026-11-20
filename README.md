@@ -99,4 +99,4 @@ demo subdomain and vercel.app redirect to www. `siteUrl` defaults to the real do
 The demo-tracking script has been removed; never add it back to this site.
 
 Still to do:
-- Set `FORM_WEBHOOK_URL` so the forms deliver.
+- Forms email krestoredlife@outlook.com + kingdomrestoredlife@gmail.com from forms@dfd.llc (DFD shared `RESEND_API_KEY`). Change recipients with `FORM_TO` (comma-separated); `FORM_WEBHOOK_URL` optionally adds a Slack copy.
